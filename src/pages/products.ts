@@ -1,5 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, importProvidersFrom } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Route } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+
+export function getRouteConfig(): Route {
+  return {
+    canActivate: [() => true],
+    providers: [importProvidersFrom(HttpClientModule)],
+  };
+}
 
 @Component({
   template: `
@@ -8,6 +17,6 @@ import { RouterOutlet } from '@angular/router';
     <router-outlet></router-outlet>
   `,
   standalone: true,
-  imports: [RouterOutlet]
+  imports: [RouterOutlet],
 })
 export default class About {}
